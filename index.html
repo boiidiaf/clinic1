@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aya Clinic — Votre Santé, Notre Mission</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+  :root {
+    --blue: #0057B8;
+    --blue-dark: #003d82;
+    --blue-light: #E8F2FF;
+    --blue-mid: #1a6fd4;
+    --white: #FFFFFF;
+    --text: #0A0A0A;
+    --muted: #6B7280;
+    --border: rgba(0,87,184,0.12);
+    --radius-sm: 12px;
+    --radius-md: 20px;
+    --radius-lg: 32px;
+    --shadow-soft: 0 4px 24px rgba(0,87,184,0.08), 0 1px 4px rgba(0,0,0,0.04);
+    --shadow-hover: 0 16px 48px rgba(0,87,184,0.18), 0 4px 16px rgba(0,0,0,0.08);
+    --transition: all 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Urbanist', sans-serif;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAVBAR ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 0 5%;
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition);
+  }
+  nav.scrolled {
+    background: rgba(255,255,255,0.78);
+    backdrop-filter: blur(20px) saturate(1.8);
+    -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 2px 20px rgba(0,87,184,0.06);
+  }
+  .nav-logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -0.02em;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo i { font-size: 1.3rem; }
+  .nav-logo span { color: var(--text); }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 0.92rem;
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+  .nav-links a:hover { color: var(--blue); }
+  .nav-cta {
+    background: var(--blue);
+    color: #fff !important;
+    padding: 10px 24px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 4px 14px rgba(0,87,184,0.3);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-cta:hover {
+    background: var(--blue-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0,87,184,0.4);
+  }
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--text);
+    border-radius: 2px;
+    transition: var(--transition);
+  }
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 72px; left: 0; right: 0;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(20px);
+    padding: 1.5rem 5%;
+    z-index: 999;
+    border-bottom: 1px solid var(--border);
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none;
+    color: var(--text);
+    font-weight: 500;
+    font-size: 1.1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .mobile-menu .nav-cta { text-align: center; margin-top: 0.5rem; justify-content: center; }
+
+  /* ─── HERO ─── */
+  #hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1800&q=80');
+    background-size: cover;
+    background-position: center;
+  }
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(0,57,130,0.82) 0%, rgba(0,87,184,0.6) 50%, rgba(0,30,80,0.88) 100%);
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 860px;
+    padding: 0 2rem;
+  }
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.6s 0.2s forwards;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; background: #4ade80; border-radius: 50%; animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.3)} }
+  .hero-title {
+    font-size: clamp(2.8rem, 7vw, 5.5rem);
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+  }
+  .hero-title .word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  .hero-title .word:nth-child(1) { animation: fadeUp 0.7s 0.4s forwards; }
+  .hero-title .word:nth-child(2) { animation: fadeUp 0.7s 0.55s forwards; }
+  .hero-title .word:nth-child(3) { animation: fadeUp 0.7s 0.7s forwards; }
+  .hero-title .word:nth-child(4) { animation: fadeUp 0.7s 0.85s forwards; }
+  .hero-title .comma { animation: fadeUp 0.7s 0.4s forwards; opacity: 0; transform: translateY(40px); display: inline-block; }
+  .hero-title .accent { color: #93c5fd; }
+  .hero-sub {
+    font-size: 1.15rem;
+    color: rgba(255,255,255,0.82);
+    max-width: 560px;
+    margin: 0 auto 2.5rem;
+    font-weight: 400;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s 1s forwards;
+  }
+  .hero-arabic {
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 0.5rem;
+    direction: rtl;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s 0.95s forwards;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.7s 1.1s forwards;
+  }
+  .btn-primary {
+    background: var(--white);
+    color: var(--blue);
+    padding: 16px 36px;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-primary:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 16px 40px rgba(0,0,0,0.25); }
+  .btn-ghost {
+    background: transparent;
+    color: #fff;
+    border: 2px solid rgba(255,255,255,0.6);
+    padding: 14px 36px;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: var(--transition);
+    backdrop-filter: blur(8px);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .btn-ghost:hover { background: rgba(255,255,255,0.12); border-color: #fff; transform: translateY(-2px); }
+  .scroll-indicator {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.7s 1.4s forwards;
+  }
+  .scroll-arrow {
+    width: 28px; height: 28px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: bounce 2s infinite;
+    color: rgba(255,255,255,0.7);
+    font-size: 0.75rem;
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+  @keyframes fadeUp { to { opacity:1; transform:translateY(0); } }
+
+  /* ─── STATS ─── */
+  #stats {
+    background: var(--white);
+    padding: 4rem 5%;
+    border-bottom: 1px solid var(--border);
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 2px;
+    max-width: 1100px;
+    margin: 0 auto;
+    background: var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .stat-item {
+    background: var(--white);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .stat-icon {
+    font-size: 1.6rem;
+    color: var(--blue);
+    margin-bottom: 0.8rem;
+    opacity: 0.7;
+  }
+  .stat-num {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    color: var(--blue);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    display: block;
+  }
+  .stat-plus { color: var(--blue-mid); }
+  .stat-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 0.5rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  /* ─── SECTION BASE ─── */
+  section { padding: 7rem 5%; }
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--blue);
+    background: var(--blue-light);
+    padding: 6px 16px;
+    border-radius: 50px;
+    margin-bottom: 1.2rem;
+  }
+  .section-title {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1.05rem;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .section-head { margin-bottom: 4rem; }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ─── SERVICES ─── */
+  #services { background: var(--blue-light); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .service-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2rem;
+    transition: var(--transition);
+    box-shadow: var(--shadow-soft);
+    border: 1px solid transparent;
+  }
+  .service-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+    border-color: rgba(0,87,184,0.15);
+  }
+  .service-icon {
+    width: 56px; height: 56px;
+    background: var(--blue-light);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    color: var(--blue);
+    transition: var(--transition);
+  }
+  .service-card:hover .service-icon {
+    background: var(--blue);
+    color: #fff;
+    transform: scale(1.08);
+  }
+  .service-card h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.01em;
+  }
+  .service-card p { font-size: 0.92rem; color: var(--muted); line-height: 1.65; }
+
+  /* ─── VIDEO ─── */
+  .video-section-dark {
+    background: linear-gradient(135deg, #001a4d 0%, var(--blue) 60%, #003d82 100%);
+    padding: 7rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .video-section-dark::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -20%;
+    width: 60%; height: 200%;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .video-section-dark .section-tag { background: rgba(255,255,255,0.15); color: #fff; }
+  .video-section-dark .section-title { color: #fff; }
+  .video-section-dark .section-sub { color: rgba(255,255,255,0.72); margin: 0 auto 3rem; }
+  .video-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1);
+    aspect-ratio: 16/9;
+    position: relative;
+  }
+  .video-wrapper iframe {
+    width: 100%; height: 100%;
+    border: none;
+    display: block;
+  }
+
+  /* ─── DOCTORS ─── */
+  #doctors { background: var(--white); }
+  .doctors-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .doctor-card {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--white);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+    border: 1px solid var(--border);
+  }
+  .doctor-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-hover); }
+  .doctor-photo {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+  .doctor-info { padding: 1.5rem; }
+  .doctor-specialty {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--blue);
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .doctor-info h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+  }
+  .doctor-info p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .doctor-social {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 1rem;
+  }
+  .doctor-social a {
+    width: 34px; height: 34px;
+    border-radius: 8px;
+    background: var(--blue-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: var(--transition);
+    color: var(--blue);
+    font-size: 0.85rem;
+  }
+  .doctor-social a:hover { background: var(--blue); color: #fff; }
+
+  /* ─── WHY US ─── */
+  #why { background: var(--blue-light); }
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .benefit-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    background: var(--white);
+    box-shadow: var(--shadow-soft);
+    transition: var(--transition);
+  }
+  .benefit-item:hover { transform: translateX(6px); box-shadow: var(--shadow-hover); }
+  .benefit-icon {
+    width: 48px; height: 48px;
+    flex-shrink: 0;
+    background: var(--blue-light);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: var(--blue);
+  }
+  .benefit-text h4 { font-size: 1rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .benefit-text p { font-size: 0.88rem; color: var(--muted); line-height: 1.6; }
+  .why-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-hover);
+  }
+  .why-image img { width: 100%; height: 500px; object-fit: cover; display: block; }
+
+  /* ─── TESTIMONIALS ─── */
+  #testimonials { background: var(--white); overflow: hidden; }
+  .testimonials-inner { max-width: 1200px; margin: 0 auto; }
+  .testimonials-track-wrapper { overflow: hidden; }
+  .testimonials-track {
+    display: flex;
+    gap: 1.5rem;
+    transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+  }
+  .testimonial-card {
+    min-width: calc(33.333% - 1rem);
+    background: var(--blue-light);
+    border-radius: var(--radius-md);
+    padding: 2.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 20px;
+    font-size: 8rem;
+    font-weight: 800;
+    color: var(--blue);
+    opacity: 0.08;
+    line-height: 1;
+    font-family: Georgia, serif;
+  }
+  .testimonial-stars { display: flex; gap: 4px; margin-bottom: 1rem; color: #f59e0b; font-size: 0.9rem; }
+  .testimonial-text {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .testimonial-author { display: flex; align-items: center; gap: 1rem; }
+  .testimonial-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--blue);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+  .testimonial-name { font-weight: 700; font-size: 0.95rem; }
+  .testimonial-loc { font-size: 0.8rem; color: var(--muted); display: flex; align-items: center; gap: 5px; }
+  .carousel-controls { display: flex; justify-content: center; gap: 0.75rem; margin-top: 2.5rem; }
+  .carousel-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--border);
+    border: none;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+  }
+  .carousel-dot.active { background: var(--blue); width: 24px; border-radius: 4px; }
+
+  /* ─── VIDEO 2 ─── */
+  #video2 {
+    background: var(--blue-light);
+    padding: 7rem 5%;
+    text-align: center;
+  }
+  #video2 .video-wrapper { box-shadow: var(--shadow-hover); }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--white); }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .contact-info h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; }
+  .contact-detail {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.2rem;
+    padding: 1.2rem;
+    background: var(--blue-light);
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+  }
+  .contact-detail:hover { transform: translateX(4px); box-shadow: var(--shadow-soft); }
+  .contact-detail-icon {
+    width: 40px; height: 40px;
+    background: var(--blue);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: #fff;
+    font-size: 1rem;
+  }
+  .contact-detail-text strong { display: block; font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
+  .contact-detail-text span { font-size: 0.88rem; color: var(--muted); }
+  .map-embed {
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    height: 200px;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow-soft);
+  }
+  .map-embed iframe { width: 100%; height: 100%; border: none; display: block; }
+  .contact-form h3 { font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem; }
+  .form-group { margin-bottom: 1.2rem; }
+  .form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.02em;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 14px 18px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-family: 'Urbanist', sans-serif;
+    font-size: 0.95rem;
+    color: var(--text);
+    background: var(--white);
+    transition: var(--transition);
+    outline: none;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(0,87,184,0.1);
+  }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-family: 'Urbanist', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 8px 24px rgba(0,87,184,0.3);
+    letter-spacing: 0.02em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+  .btn-submit:hover {
+    background: var(--blue-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px rgba(0,87,184,0.4);
+  }
+  .btn-submit:disabled { opacity: 0.8; cursor: not-allowed; transform: none; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--blue);
+    color: rgba(255,255,255,0.85);
+    padding: 5rem 5% 2.5rem;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto 3rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.12);
+  }
+  .footer-brand .nav-logo { color: #fff; margin-bottom: 1rem; display: inline-flex; }
+  .footer-brand p { font-size: 0.9rem; line-height: 1.7; opacity: 0.75; max-width: 280px; }
+  .footer-brand .algerian-motif {
+    margin-top: 1.5rem;
+    font-size: 1.6rem;
+    opacity: 0.6;
+    letter-spacing: 0.1em;
+  }
+  .footer-col h4 {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col li { margin-bottom: 0.7rem; }
+  .footer-col a {
+    color: rgba(255,255,255,0.75);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer-col a:hover { color: #fff; }
+  .social-links { display: flex; gap: 0.8rem; margin-top: 1rem; }
+  .social-link {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.12);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: var(--transition);
+  }
+  .social-link:hover { background: rgba(255,255,255,0.25); transform: translateY(-2px); }
+  .footer-bottom {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.83rem;
+    opacity: 0.55;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 1024px) {
+    .services-grid, .doctors-grid { grid-template-columns: repeat(2,1fr); }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .why-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .testimonial-card { min-width: calc(50% - 0.75rem); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 768px) {
+    .nav-links, nav > .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .services-grid, .doctors-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2,1fr); }
+    .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+    .testimonial-card { min-width: 100%; }
+    section { padding: 5rem 5%; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-ghost { width: 100%; max-width: 280px; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">
+    <i class="fa-solid fa-staff-snake" style="color:var(--blue)"></i>
+    Aya<span>&nbsp;Clinic</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#hero"><i class="fa-solid fa-house fa-sm"></i> Accueil</a></li>
+    <li><a href="#services"><i class="fa-solid fa-stethoscope fa-sm"></i> Services</a></li>
+    <li><a href="#doctors"><i class="fa-solid fa-user-doctor fa-sm"></i> Médecins</a></li>
+    <li><a href="#why"><i class="fa-solid fa-circle-info fa-sm"></i> À propos</a></li>
+    <li><a href="#contact"><i class="fa-solid fa-envelope fa-sm"></i> Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">
+    <i class="fa-solid fa-calendar-check"></i> Prendre RDV
+  </a>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="closeMenu()"><i class="fa-solid fa-house"></i> Accueil</a>
+  <a href="#services" onclick="closeMenu()"><i class="fa-solid fa-stethoscope"></i> Services</a>
+  <a href="#doctors" onclick="closeMenu()"><i class="fa-solid fa-user-doctor"></i> Médecins</a>
+  <a href="#why" onclick="closeMenu()"><i class="fa-solid fa-circle-info"></i> À propos</a>
+  <a href="#contact" onclick="closeMenu()"><i class="fa-solid fa-envelope"></i> Contact</a>
+  <a href="#contact" class="nav-cta" onclick="closeMenu()"><i class="fa-solid fa-calendar-check"></i> Prendre RDV</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="dot"></span>
+      Clinique Certifiée · Alger, Algérie
+    </div>
+    <p class="hero-arabic">صحتك أمانة في أيدينا</p>
+    <h1 class="hero-title">
+      <span class="word">Votre</span>&nbsp;<span class="word">Santé<span class="comma">,</span></span>&nbsp;<span class="word accent">Notre</span>&nbsp;<span class="word accent">Mission</span>
+    </h1>
+    <p class="hero-sub">Des soins médicaux d'excellence au cœur de l'Algérie. Une équipe de spécialistes dévoués, des technologies de pointe, pour votre bien-être.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">
+        <i class="fa-solid fa-calendar-check"></i> Prendre Rendez-vous
+      </a>
+      <a href="#services" class="btn-ghost">
+        <i class="fa-solid fa-stethoscope"></i> Nos Services
+      </a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <span>Défiler</span>
+    <div class="scroll-arrow"><i class="fa-solid fa-chevron-down"></i></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item fade-up">
+      <div class="stat-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+      <span class="stat-num" data-target="12500"><span class="counter">0</span><span class="stat-plus">+</span></span>
+      <span class="stat-label">Patients Traités</span>
+    </div>
+    <div class="stat-item fade-up" style="transition-delay:0.1s">
+      <div class="stat-icon"><i class="fa-solid fa-user-doctor"></i></div>
+      <span class="stat-num" data-target="48"><span class="counter">0</span><span class="stat-plus">+</span></span>
+      <span class="stat-label">Médecins Spécialistes</span>
+    </div>
+    <div class="stat-item fade-up" style="transition-delay:0.2s">
+      <div class="stat-icon"><i class="fa-solid fa-award"></i></div>
+      <span class="stat-num" data-target="15"><span class="counter">0</span></span>
+      <span class="stat-label">Années d'Expérience</span>
+    </div>
+    <div class="stat-item fade-up" style="transition-delay:0.3s">
+      <div class="stat-icon"><i class="fa-solid fa-microscope"></i></div>
+      <span class="stat-num" data-target="22"><span class="counter">0</span></span>
+      <span class="stat-label">Spécialités Médicales</span>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-up">
+      <span class="section-tag"><i class="fa-solid fa-stethoscope"></i> Nos Spécialités</span>
+      <h2 class="section-title">Des Soins pour<br>Chaque Besoin</h2>
+      <p class="section-sub">Un éventail complet de spécialités médicales pour prendre en charge votre santé à chaque étape de vie.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-up">
+        <div class="service-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+        <h3>Cardiologie</h3>
+        <p>Diagnostic et traitement des maladies cardiovasculaires avec des équipements d'échocardiographie de dernière génération.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.1s">
+        <div class="service-icon"><i class="fa-solid fa-baby"></i></div>
+        <h3>Pédiatrie</h3>
+        <p>Suivi médical dédié aux enfants de la naissance à l'adolescence, dans un espace chaleureux et sécurisé.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.2s">
+        <div class="service-icon"><i class="fa-solid fa-x-ray"></i></div>
+        <h3>Radiologie</h3>
+        <p>Imagerie médicale avancée : IRM, scanner, échographie et radiologie numérique pour un diagnostic précis.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.15s">
+        <div class="service-icon"><i class="fa-solid fa-scalpel"></i></div>
+        <h3>Chirurgie</h3>
+        <p>Interventions chirurgicales programmées et d'urgence par des chirurgiens experts, dans des blocs opératoires certifiés.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.25s">
+        <div class="service-icon"><i class="fa-solid fa-user-doctor"></i></div>
+        <h3>Médecine Générale</h3>
+        <p>Consultations de médecine générale pour un suivi global de votre santé, avec prise en charge rapide et personnalisée.</p>
+      </div>
+      <div class="service-card fade-up" style="transition-delay:0.3s">
+        <div class="service-icon"><i class="fa-solid fa-truck-medical"></i></div>
+        <h3>Urgences 24h/24</h3>
+        <p>Service d'urgences ouvert en permanence, avec équipe de réanimation et médecins urgentistes disponibles en continu.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO 1 — Clinic tour -->
+<div class="video-section-dark">
+  <div class="fade-up">
+    <span class="section-tag"><i class="fa-solid fa-hospital"></i> Notre Clinique</span>
+    <h2 class="section-title">Découvrez Notre Clinique</h2>
+    <p class="section-sub">Une infrastructure moderne au service de votre santé, alliant technologie et humanité.</p>
+  </div>
+  <div class="video-wrapper fade-up" style="transition-delay:0.2s">
+    <!-- Algerian Clinic / Medical Center tour -->
+    <iframe src="https://www.youtube.com/embed/6K6FrG0o1CE" title="Présentation Clinique" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>
+</div>
+
+<!-- DOCTORS -->
+<section id="doctors">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-up">
+      <span class="section-tag"><i class="fa-solid fa-user-doctor"></i> Notre Équipe</span>
+      <h2 class="section-title">Des Médecins<br>d'Excellence</h2>
+      <p class="section-sub">Une équipe pluridisciplinaire de spécialistes engagés pour vous offrir les meilleurs soins possibles.</p>
+    </div>
+    <div class="doctors-grid">
+      <div class="doctor-card fade-up">
+        <img class="doctor-photo" src="https://png.pngtree.com/png-clipart/20231002/original/pngtree-young-afro-professional-doctor-png-image_13227671.png" alt="Dr. Karim Benali">
+        <div class="doctor-info">
+          <p class="doctor-specialty"><i class="fa-solid fa-heart-pulse"></i> Cardiologue</p>
+          <h3>Dr. Karim Benali</h3>
+          <p>Spécialiste en cardiologie interventionnelle avec 18 ans d'expérience. Ancien interne des Hôpitaux de Paris.</p>
+          <div class="doctor-social">
+            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#contact" title="Rendez-vous"><i class="fa-solid fa-calendar-plus"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="doctor-card fade-up" style="transition-delay:0.1s">
+        <img class="doctor-photo" src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=600&q=80" alt="Dr. Yasmine Khelil">
+        <div class="doctor-info">
+          <p class="doctor-specialty"><i class="fa-solid fa-baby"></i> Pédiatre</p>
+          <h3>Dr. Yasmine Khelil</h3>
+          <p>Médecin pédiatre spécialisée en néonatologie. Formée à Bordeaux, passionnée par la santé de l'enfant.</p>
+          <div class="doctor-social">
+            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#contact" title="Rendez-vous"><i class="fa-solid fa-calendar-plus"></i></a>
+          </div>
+        </div>
+      </div>
+      <div class="doctor-card fade-up" style="transition-delay:0.2s">
+        <img class="doctor-photo" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&q=80" alt="Dr. Amel Hadj">
+        <div class="doctor-info">
+          <p class="doctor-specialty"><i class="fa-solid fa-scalpel"></i> Chirurgienne</p>
+          <h3>Dr. Amel Hadj</h3>
+          <p>Chirurgienne générale experte en chirurgie laparoscopique. 12 ans de pratique dans les meilleurs établissements.</p>
+          <div class="doctor-social">
+            <a href="#" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            <a href="#contact" title="Rendez-vous"><i class="fa-solid fa-calendar-plus"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div class="why-grid">
+    <div class="fade-up">
+      <span class="section-tag"><i class="fa-solid fa-shield-heart"></i> Pourquoi Nous</span>
+      <h2 class="section-title">L'Excellence au<br>Cœur de Nos Soins</h2>
+      <p class="section-sub" style="margin-bottom:2.5rem">Nous combinons expertise médicale et technologie de pointe pour vous offrir une expérience de soin sans égale.</p>
+      <div class="benefit-item">
+        <div class="benefit-icon"><i class="fa-solid fa-hospital-user"></i></div>
+        <div class="benefit-text">
+          <h4>Infrastructure Moderne</h4>
+          <p>Équipements médicaux de dernière génération dans des locaux aux normes internationales.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon"><i class="fa-solid fa-users-between-lines"></i></div>
+        <div class="benefit-text">
+          <h4>Équipe Pluridisciplinaire</h4>
+          <p>48 spécialistes formés dans les meilleures universités, pour une prise en charge globale.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon"><i class="fa-solid fa-microscope"></i></div>
+        <div class="benefit-text">
+          <h4>Diagnostic Précis</h4>
+          <p>Laboratoire d'analyses intégré avec résultats rapides pour un traitement sans délai.</p>
+        </div>
+      </div>
+      <div class="benefit-item">
+        <div class="benefit-icon"><i class="fa-solid fa-clock"></i></div>
+        <div class="benefit-text">
+          <h4>Disponibilité Continue</h4>
+          <p>Urgences 24h/24, 7j/7, avec téléconsultation disponible pour le suivi à distance.</p>
+        </div>
+      </div>
+    </div>
+    <div class="why-image fade-up" style="transition-delay:0.2s">
+      <img src="https://images.unsplash.com/photo-1551076805-e1869033e561?w=800&q=80" alt="Clinique Aya - Soins de qualité">
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testimonials-inner">
+    <div class="section-head fade-up" style="text-align:center;max-width:600px;margin-left:auto;margin-right:auto">
+      <span class="section-tag"><i class="fa-solid fa-comment-medical"></i> Témoignages</span>
+      <h2 class="section-title">Ce Que Disent<br>Nos Patients</h2>
+    </div>
+    <div class="testimonials-track-wrapper fade-up">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Une clinique exceptionnelle. Le Dr. Benali m'a pris en charge avec un professionnalisme remarquable. Les équipements sont modernes et le personnel est très attentionné. Je recommande vivement !"</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">SB</div>
+            <div>
+              <p class="testimonial-name">Sofiane Bouzidi</p>
+              <p class="testimonial-loc"><i class="fa-solid fa-location-dot"></i> Alger · Cardiologie</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">«خدمة ممتازة وأطباء متميزون. العيادة نظيفة ومريحة، وأشعر بالاطمئنان في كل زيارة. شكراً جزيلاً لفريق عيادة آية على الاهتمام والرعاية.»</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">FM</div>
+            <div>
+              <p class="testimonial-name">Fatima Mansouri</p>
+              <p class="testimonial-loc"><i class="fa-solid fa-location-dot"></i> Batna · Pédiatrie</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Mon opération chirurgicale s'est parfaitement déroulée grâce au Dr. Hadj. La prise en charge pré et post-opératoire était impeccable. Une équipe de grande qualité."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">AK</div>
+            <div>
+              <p class="testimonial-name">Ahmed Khelifi</p>
+              <p class="testimonial-loc"><i class="fa-solid fa-location-dot"></i> Constantine · Chirurgie</p>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="testimonial-stars">
+            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i>
+          </div>
+          <p class="testimonial-text">"Excellente expérience pour ma fille en pédiatrie. Le Dr. Yasmine est patiente, à l'écoute, et a su mettre mon enfant à l'aise. Les délais d'attente sont courts, c'est très appréciable."</p>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar">NB</div>
+            <div>
+              <p class="testimonial-name">Nadia Belhadj</p>
+              <p class="testimonial-loc"><i class="fa-solid fa-location-dot"></i> Oran · Pédiatrie</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-controls">
+      <button class="carousel-dot active" onclick="goToSlide(0)" aria-label="Slide 1"></button>
+      <button class="carousel-dot" onclick="goToSlide(1)" aria-label="Slide 2"></button>
+      <button class="carousel-dot" onclick="goToSlide(2)" aria-label="Slide 3"></button>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO 2 — Virtual Tour -->
+<section id="video2">
+  <div class="fade-up" style="text-align:center;max-width:700px;margin:0 auto 3rem">
+    <span class="section-tag"><i class="fa-solid fa-video"></i> Visite Virtuelle</span>
+    <h2 class="section-title">Visite Virtuelle<br>de la Clinique</h2>
+    <p class="section-sub" style="margin:0 auto">Explorez nos installations modernes et notre environnement de soins depuis chez vous.</p>
+  </div>
+  <div class="video-wrapper fade-up" style="max-width:900px;margin:0 auto;transition-delay:0.2s">
+    <!-- Modern hospital / clinic virtual tour -->
+    <iframe src="https://www.youtube.com/embed/4kBVCkbA52I" title="Visite Virtuelle Aya Clinic" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-head fade-up" style="text-align:center;margin-left:auto;margin-right:auto;max-width:600px">
+      <span class="section-tag"><i class="fa-solid fa-calendar-check"></i> Nous Rejoindre</span>
+      <h2 class="section-title">Prendre<br>Rendez-vous</h2>
+      <p class="section-sub" style="margin:0 auto">Réservez votre consultation en ligne. Notre équipe confirme dans les 24 heures.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-up">
+        <h3>Informations de Contact</h3>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="contact-detail-text">
+            <strong>Adresse</strong>
+            <span>123 Rue Didouche Mourad, Alger Centre, Algérie</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="fa-solid fa-phone"></i></div>
+          <div class="contact-detail-text">
+            <strong>Téléphone</strong>
+            <span>+213 21 74 58 90 · Urgences: +213 21 74 58 00</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="fa-solid fa-envelope"></i></div>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            <span>contact@ayaclinic.dz · rdv@ayaclinic.dz</span>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-detail-icon"><i class="fa-solid fa-clock"></i></div>
+          <div class="contact-detail-text">
+            <strong>Horaires</strong>
+            <span>Dim–Jeu: 08h–20h · Sam: 09h–17h · Urgences: 24h/24</span>
+          </div>
+        </div>
+        <div class="map-embed">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.563!2d3.0588!3d36.7372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x128fb26977ea659f%3A0x7e236695f0bb7b87!2sDidouche%20Mourad%2C%20Alger!5e0!3m2!1sfr!2sdz!4v1700000000000" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+      <div class="fade-up" style="transition-delay:0.2s">
+        <h3>Formulaire de Rendez-vous</h3>
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fa-solid fa-user fa-xs"></i> Prénom *</label>
+            <input type="text" placeholder="Votre prénom">
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-user fa-xs"></i> Nom *</label>
+            <input type="text" placeholder="Votre nom">
+          </div>
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-phone fa-xs"></i> Téléphone *</label>
+          <input type="tel" placeholder="+213 XX XX XX XX">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-envelope fa-xs"></i> Email</label>
+          <input type="email" placeholder="votre@email.com">
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-stethoscope fa-xs"></i> Spécialité souhaitée *</label>
+          <select>
+            <option value="">Choisissez une spécialité</option>
+            <option>Cardiologie</option>
+            <option>Pédiatrie</option>
+            <option>Radiologie</option>
+            <option>Chirurgie</option>
+            <option>Médecine Générale</option>
+            <option>Urgences</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label><i class="fa-solid fa-calendar fa-xs"></i> Date souhaitée</label>
+            <input type="date">
+          </div>
+          <div class="form-group">
+            <label><i class="fa-solid fa-clock fa-xs"></i> Heure préférée</label>
+            <select>
+              <option>Matin (08h–12h)</option>
+              <option>Après-midi (12h–17h)</option>
+              <option>Soir (17h–20h)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-comment-medical fa-xs"></i> Message (facultatif)</label>
+          <textarea rows="3" placeholder="Décrivez brièvement votre motif de consultation..."></textarea>
+        </div>
+        <button class="btn-submit" id="submitBtn" onclick="submitForm(this)">
+          <i class="fa-solid fa-paper-plane"></i> Confirmer le Rendez-vous
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo" style="color:#fff">
+        <i class="fa-solid fa-staff-snake" style="color:rgba(255,255,255,0.9)"></i>
+        Aya Clinic
+      </a>
+      <p>Votre partenaire santé de confiance en Algérie. Des soins médicaux d'excellence pour toute la famille, au cœur d'Alger.</p>
+      <div class="algerian-motif" title="Croissant et étoile algériens">☽ ★</div>
+      <div class="social-links" style="margin-top:1.5rem">
+        <a href="#" class="social-link" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="#" class="social-link" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#" class="social-link" title="Twitter/X"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#" class="social-link" title="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4><i class="fa-solid fa-sitemap fa-xs"></i> Navigation</h4>
+      <ul>
+        <li><a href="#hero"><i class="fa-solid fa-chevron-right fa-xs"></i> Accueil</a></li>
+        <li><a href="#services"><i class="fa-solid fa-chevron-right fa-xs"></i> Nos Services</a></li>
+        <li><a href="#doctors"><i class="fa-solid fa-chevron-right fa-xs"></i> Médecins</a></li>
+        <li><a href="#why"><i class="fa-solid fa-chevron-right fa-xs"></i> À propos</a></li>
+        <li><a href="#testimonials"><i class="fa-solid fa-chevron-right fa-xs"></i> Témoignages</a></li>
+        <li><a href="#contact"><i class="fa-solid fa-chevron-right fa-xs"></i> Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4><i class="fa-solid fa-stethoscope fa-xs"></i> Spécialités</h4>
+      <ul>
+        <li><a href="#services"><i class="fa-solid fa-heart-pulse fa-xs"></i> Cardiologie</a></li>
+        <li><a href="#services"><i class="fa-solid fa-baby fa-xs"></i> Pédiatrie</a></li>
+        <li><a href="#services"><i class="fa-solid fa-x-ray fa-xs"></i> Radiologie</a></li>
+        <li><a href="#services"><i class="fa-solid fa-scalpel fa-xs"></i> Chirurgie</a></li>
+        <li><a href="#services"><i class="fa-solid fa-user-doctor fa-xs"></i> Médecine Générale</a></li>
+        <li><a href="#services"><i class="fa-solid fa-truck-medical fa-xs"></i> Urgences 24h/24</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2024 Aya Clinic — Tous droits réservés · Alger, Algérie 🇩🇿</span>
+    <span>Mentions légales · Politique de confidentialité</span>
+  </div>
+</footer>
+
+<script>
+  // Navbar scroll
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Fade-up observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Counter animation
+  function animateCounter(el, target, duration = 1800) {
+    let start = 0;
+    const step = target / (duration / 16);
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= target) { start = target; clearInterval(timer); }
+      el.textContent = Math.floor(start).toLocaleString('fr-DZ');
+    }, 16);
+  }
+
+  let counted = false;
+  const statsObs = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !counted) {
+      counted = true;
+      document.querySelectorAll('.stat-num').forEach(stat => {
+        const target = parseInt(stat.dataset.target);
+        animateCounter(stat.querySelector('.counter'), target);
+      });
+    }
+  }, { threshold: 0.3 });
+  statsObs.observe(document.getElementById('stats'));
+
+  // Testimonials carousel
+  let currentSlide = 0;
+  const track = document.getElementById('testimonialsTrack');
+  const dots = document.querySelectorAll('.carousel-dot');
+
+  function goToSlide(n) {
+    currentSlide = n;
+    const w = window.innerWidth;
+    let cardW;
+    if (w <= 768) cardW = track.parentElement.offsetWidth;
+    else if (w <= 1024) cardW = track.parentElement.offsetWidth / 2;
+    else cardW = track.parentElement.offsetWidth / 3;
+    track.style.transform = `translateX(-${n * (cardW + 24)}px)`;
+    dots.forEach((d, i) => d.classList.toggle('active', i === n));
+  }
+
+  setInterval(() => goToSlide((currentSlide + 1) % 3), 4500);
+
+  function updateSlideWidth() {
+    const w = window.innerWidth;
+    track.querySelectorAll('.testimonial-card').forEach(c => {
+      c.style.minWidth = w <= 768 ? '100%' : w <= 1024 ? 'calc(50% - 0.75rem)' : 'calc(33.333% - 1rem)';
+    });
+    goToSlide(currentSlide);
+  }
+  updateSlideWidth();
+  window.addEventListener('resize', updateSlideWidth);
+
+  // Form submit
+  function submitForm(btn) {
+    btn.innerHTML = '<i class="fa-solid fa-check"></i> Demande envoyée !';
+    btn.style.background = '#059669';
+    btn.disabled = true;
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Confirmer le Rendez-vous';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3500);
+  }
+</script>
+</body>
+</html>
